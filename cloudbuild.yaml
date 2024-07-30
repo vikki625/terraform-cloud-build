@@ -7,8 +7,6 @@ steps:
   - | 
       echo "***********************"
       echo "$BRANCH_NAME"
-      echo "$BASE_BRANCH"
-      echo "$PR_NUMBER"
       echo "***********************"
 
 - id: 'tf init'
