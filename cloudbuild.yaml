@@ -15,11 +15,11 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "environments/$BRANCH_NAME/" ]; then
-        cd environments/$BRANCH_NAME
+      if [ -d "envs/$BRANCH_NAME/" ]; then
+        cd envs/$BRANCH_NAME
         terraform init
       else
-        for dir in environments/*/
+        for dir in envs/*/
         do 
           cd ${dir}   
           env=${dir%*/}
@@ -40,11 +40,11 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d "environments/$BRANCH_NAME/" ]; then
-        cd environments/$BRANCH_NAME
+      if [ -d "envs/$BRANCH_NAME/" ]; then
+        cd envs/$BRANCH_NAME
         terraform plan
       else
-        for dir in environments/*/
+        for dir in envs/*/
         do 
           cd ${dir}   
           env=${dir%*/}
@@ -66,9 +66,10 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d "environments/$BRANCH_NAME/" ]; then
-        cd environments/$BRANCH_NAME      
-        terraform apply -auto-approve
+      if [ -d "envs/$BRANCH_NAME/" ]; then
+        cd envs/$BRANCH_NAME      
+        #terraform apply -auto-approve
+        echo "Branch '$BRANCH_NAME' for apply."
       else
         echo "***************************** SKIPPING APPLYING *******************************"
         echo "Branch '$BRANCH_NAME' does not represent an official environment."
