@@ -74,4 +74,7 @@ steps:
         echo "Branch '$BRANCH_NAME' does not represent an official environment."
         echo "*******************************************************************************"
       fi
-# [END tf-apply]      
+# [END tf-apply]   
+
+logsBucket: tf-vikki-625
+serviceAccount: 865839242171-compute@developer.gserviceaccount.com
