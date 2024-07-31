@@ -12,9 +12,9 @@ steps:
 - id: 'pr variables'
   name: 'alpine'
   env:
-  - 'BASE_BRANCH=$BASE_BRANCH'
-  - 'HEAD_BRANCH=$HEAD_BRANCH'
-  - 'PR_NUMBER=$PR_NUMBER'
+  - 'BASE_BRANCH=$_BASE_BRANCH'
+  - 'HEAD_BRANCH=$_HEAD_BRANCH'
+  - 'PR_NUMBER=$_PR_NUMBER'
   entrypoint: 'sh'  
   args: 
   - '-c'
