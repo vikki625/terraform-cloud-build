@@ -30,7 +30,7 @@ steps:
   - '-c'
   - | 
     cd envs/$_BASE_BRANCH
-    terraform plan > plan.txt
+    terraform plan -out=plan.txt
 # [END tf-plan]
 
 # [Fetch GITHUB PAT] 
