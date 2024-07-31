@@ -9,7 +9,8 @@ steps:
       echo "$BRANCH_NAME"
       echo "***********************"
 
-- id: 'ubuntu'
+- id: 'pr variables'
+  name: 'alpine'
   env:
   - 'BASE_BRANCH=$BASE_BRANCH'
   - 'HEAD_BRANCH=$HEAD_BRANCH'
