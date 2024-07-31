@@ -36,7 +36,6 @@ steps:
 # [Update GITHUB PR]
 - id: 'PR Comment'
   name: 'gcr.io/cloud-builders/curl'
-  secretEnv: ['PAT']
   args:
     - '-X'
     - 'POST'
@@ -47,6 +46,7 @@ steps:
     - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/comments/${_PR_NUMBER}'
     - '-d'
     - '{"body" : "HI"}'
+  secretEnv: ['PAT']
 
 # [End Update GITHUB PR]
 
