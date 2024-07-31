@@ -35,7 +35,7 @@ steps:
 
 # [Update GITHUB PR]
 - id: 'PR Comment'
-- name: 'gcr.io/cloud-builders/curl'
+  name: 'gcr.io/cloud-builders/curl'
   secretEnv: ['PAT']
   args:
     - '-X'
