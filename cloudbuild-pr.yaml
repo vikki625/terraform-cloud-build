@@ -34,7 +34,8 @@ steps:
 # [END tf-plan]
 
 # [Fetch GITHUB PAT] 
-- name: gcr.io/cloud-builders/gcloud
+- id: 'Secret Manager'
+  name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
   args: [
       '-c',
@@ -43,25 +44,24 @@ steps:
 # [End Fetch GITHUB PAT]
 
 # [Update GITHUB PR]
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
+- id: 'PR Comment'
+- name: 'gcr.io/cloud-builders/curl'
   args:
-    - '-c'
-    - |-
-      read -r -d "" gh_comment_template << EOF
-      <details>
-        <summary>Terraform Plan Results</summary>
+    - '-X'
+    - 'POST'
+    - '-H'
+    - 'Authorization': token $PAT
+    - '-H'
+    - 'Accept: application/vnd.github.v3+json'
+    - 'https://api.github.com/repos/${_REPO}/issues/${_PR_NUMBER}/comments'
+    - '-d'
+    - '{"body" : "HI"}'
 
-        \`\`\`
-        %s
-        \`\`\`
-      </details>
-      EOF
-
-      gh_comment=$(printf "$$gh_comment_template" "$(cat /workspace/plan.txt)")
-      echo $gh_comment
-      /usr/bin/gh.bash pr review $_PR_NUMBER -R $_GITHUB_USER/$REPO_NAME -c -b "$$gh_comment"
 # [End Update GITHUB PR]
 
+availableSecrets:
+  secretManager:
+  - versionName: projects/exalted-kayak-429218-m7/secrets/Terraform-github-oauthtoken-529e72/versions/1
+    env: 'PAT'
 logsBucket: tf-vikki-625
 serviceAccount: 865839242171-compute@developer.gserviceaccount.com
