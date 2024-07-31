@@ -9,6 +9,21 @@ steps:
       echo "$BRANCH_NAME"
       echo "***********************"
 
+- id: 'ubuntu'
+  env:
+  - 'BASE_BRANCH=$BASE_BRANCH'
+  - 'HEAD_BRANCH=$HEAD_BRANCH'
+  - 'PR_NUMBER=$PR_NUMBER'
+  entrypoint: 'sh'  
+  args: 
+  - '-c'
+  - | 
+      echo "***********************"
+      echo "$BASE_BRANCH"
+      echo "$PR_NUMBER"
+      echo "$HEAD_BRANCH"
+      echo "***********************"
+
 - id: 'tf init'
   name: 'hashicorp/terraform'
   entrypoint: 'sh'
