@@ -16,6 +16,7 @@ steps:
   - '-c'
   - | 
       echo "***********************"
+      echo "$BRANCH_NAME"
       echo "$_BASE_BRANCH"
       echo "$_PR_NUMBER"
       echo "$_HEAD_BRANCH"
