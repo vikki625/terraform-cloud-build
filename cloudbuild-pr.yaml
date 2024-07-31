@@ -44,7 +44,7 @@ steps:
     - 'Authorization: token $$PAT'
     - '-H'
     - 'Accept: application/vnd.github.v3+json'
-    - 'https://api.github.com/repos/${_REPO}/issues/${_PR_NUMBER}/comments'
+    - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/comments/${_PR_NUMBER}'
     - '-d'
     - '{"body" : "HI"}'
 
