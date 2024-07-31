@@ -11,18 +11,14 @@ steps:
 
 - id: 'pr variables'
   name: 'alpine'
-  env:
-  - 'BASE_BRANCH=$_BASE_BRANCH'
-  - 'HEAD_BRANCH=$_HEAD_BRANCH'
-  - 'PR_NUMBER=$_PR_NUMBER'
   entrypoint: 'sh'  
   args: 
   - '-c'
   - | 
       echo "***********************"
-      echo "$BASE_BRANCH"
-      echo "$PR_NUMBER"
-      echo "$HEAD_BRANCH"
+      echo "$_BASE_BRANCH"
+      echo "$_PR_NUMBER"
+      echo "$_HEAD_BRANCH"
       echo "***********************"
 
 - id: 'tf init'
