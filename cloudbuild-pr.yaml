@@ -33,24 +33,15 @@ steps:
     terraform plan -out=/workspace/plan.txt
 # [END tf-plan]
 
-# [Fetch GITHUB PAT] 
-- id: 'Secret Manager'
-  name: gcr.io/cloud-builders/gcloud
-  entrypoint: 'bash'
-  args: [
-      '-c',
-      "gcloud secrets versions access latest --secret=Terraform-github-oauthtoken-529e72 --format='get(payload.data)' | tr '_-' '/+' | base64 -d > token.txt"
-  ]
-# [End Fetch GITHUB PAT]
-
 # [Update GITHUB PR]
 - id: 'PR Comment'
 - name: 'gcr.io/cloud-builders/curl'
+  secretEnv: ['PAT']
   args:
     - '-X'
     - 'POST'
     - '-H'
-    - 'Authorization': token $PAT
+    - 'Authorization': token $$PAT
     - '-H'
     - 'Accept: application/vnd.github.v3+json'
     - 'https://api.github.com/repos/${_REPO}/issues/${_PR_NUMBER}/comments'
