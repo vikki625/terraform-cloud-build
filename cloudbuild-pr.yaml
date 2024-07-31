@@ -100,3 +100,5 @@ steps:
 
 logsBucket: tf-vikki-625
 serviceAccount: 865839242171-compute@developer.gserviceaccount.com
+options:
+    substitutionOption: 'ALLOW_LOOSE'
