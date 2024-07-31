@@ -41,7 +41,7 @@ steps:
     - '-X'
     - 'POST'
     - '-H'
-    - 'Authorization: token $$PAT'
+    - 'Authorization: token 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'
     - '-H'
     - 'Accept: application/vnd.github.v3+json'
     - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/comments/${_PR_NUMBER}'
@@ -52,7 +52,7 @@ steps:
 
 availableSecrets:
   secretManager:
-  - versionName: projects/exalted-kayak-429218-m7/secrets/Terraform-github-oauthtoken-529e72/versions/1
+  - versionName: projects/exalted-kayak-429218-m7/secrets/git-pat/versions/1
     env: 'PAT'
 logsBucket: tf-vikki-625
 serviceAccount: 865839242171-compute@developer.gserviceaccount.com
