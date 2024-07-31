@@ -41,7 +41,7 @@ steps:
     - '-X'
     - 'POST'
     - '-H'
-    - 'Authorization: token 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'
+    - 'Authorization: token $$PAT'
     - '-H'
     - 'Accept: application/vnd.github.v3+json'
     - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/comments/${_PR_NUMBER}'
