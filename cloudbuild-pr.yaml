@@ -1,15 +1,4 @@
-steps:
-- id: 'branch name'
-  name: 'alpine'
-  entrypoint: 'sh'  
-  args: 
-  - '-c'
-  - | 
-      echo "***********************"
-      echo "$BRANCH_NAME"
-      echo "***********************"
-
-- id: 'pr variables'
+- id: 'GIT DETAILS'
   name: 'alpine'
   entrypoint: 'sh'  
   args: 
@@ -28,24 +17,9 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "envs/$BRANCH_NAME/" ]; then
-        cd envs/$BRANCH_NAME
-        ls
-        terraform init
-      else
-        for dir in envs/*/
-        do 
-          cd ${dir}   
-          env=${dir%*/}
-          env=${env#*/}
-          echo ""
-          echo "*************** TERRAFORM INIT ******************"
-          echo "******* At environment: ${env} ********"
-          echo "*************************************************"
-          terraform init || exit 1
-          cd ../../
-        done
-      fi 
+    cd envs/$_BASE_BRANCH
+    ls
+    terraform init
 
 # [START tf-plan]
 - id: 'tf plan'
@@ -54,16 +28,8 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d "envs/$BRANCH_NAME/" ]; then
-        cd envs/$BRANCH_NAME
-        terraform plan -no-color > plan.txt
-      else
-          echo "*************** TERRAFORM PLAN ******************"
-          echo "******* At environment: ${env} not found********" > plan.txt
-          echo "*************************************************"
-          cd ../../
-        done
-      fi 
+    cd envs/$_BASE_BRANCH
+    terraform plan -no-color > plan.txt
 # [END tf-plan]
 
 # [Fetch GITHUB PAT] 
