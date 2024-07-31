@@ -43,7 +43,7 @@ steps:
 # [End Fetch GITHUB PAT]
 
 # [Update GITHUB PR]
-- name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
   args:
     - '-c'
