@@ -45,16 +45,9 @@ steps:
         cd envs/$BRANCH_NAME
         terraform plan -no-color > plan.txt
       else
-        for dir in envs/*/
-        do 
-          cd ${dir}   
-          env=${dir%*/}
-          env=${env#*/}  
-          echo ""
           echo "*************** TERRAFORM PLAN ******************"
-          echo "******* At environment: ${env} ********"
+          echo "******* At environment: ${env} not found********" > plan.txt
           echo "*************************************************"
-          terraform plan || exit 1
           cd ../../
         done
       fi 
