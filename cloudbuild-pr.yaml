@@ -30,7 +30,7 @@ steps:
   - '-c'
   - | 
     cd envs/$_BASE_BRANCH
-    terraform plan -no-color > plan.txt
+    terraform plan > plan.txt
 # [END tf-plan]
 
 # [Fetch GITHUB PAT] 
