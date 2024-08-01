@@ -40,10 +40,10 @@ steps:
     - '-X'
     - 'POST'
     - '-H'
-    - 'Authorization: token $$PAT'
+    - 'Authorization: Bearer $$PAT'
     - '-H'
     - 'Accept: application/vnd.github.v3+json'
-    - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/comments/${_PR_NUMBER}'
+    - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/${_PR_NUMBER}/comments'
     - '-d'
     - '{"body" : "HI"}'
   secretEnv: ['PAT']
