@@ -52,7 +52,7 @@ steps:
 
 availableSecrets:
   secretManager:
-  - versionName: projects/exalted-kayak-429218-m7/secrets/git-pat/versions/1
+  - versionName: projects/exalted-kayak-429218-m7/secrets/git-pat/versions/latest
     env: 'PAT'
 logsBucket: tf-vikki-625
 serviceAccount: 865839242171-compute@developer.gserviceaccount.com
