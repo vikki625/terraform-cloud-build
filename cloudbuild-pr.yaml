@@ -35,8 +35,8 @@ steps:
 
 # [Update GITHUB PR]
 - id: 'PR Comment'
-  name: 'alpine'
-  entrypoint: 'sh'
+  name: 'launcher.gcr.io/google/ubuntu1604'
+  entrypoint: bash
   args:
   - '-c'
   - curl -X PATCH -H 'Authorization:Bearer $$PAT' -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1 -d '{"title":"PR Details","body":"updated","state":"open","base":"dev"}'
