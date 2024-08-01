@@ -36,7 +36,7 @@ steps:
 # [Update GITHUB PR]
 - id: 'PR Comment'
   name: 'gcr.io/cloud-builders/curl'
-  args:
+  args: 
     - '-X'
     - 'PATCH'
     - '-H'
@@ -46,13 +46,14 @@ steps:
     - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/${_PR_NUMBER}'
     - '-d'
     - '{"title": "PR Details", "body": "updated", "state": "open", "base": "dev"}'
-  secretEnv: ['PAT']
+  env: 
+  - 'TOKEN=$_PAT'
 
 # [End Update GITHUB PR]
 
 availableSecrets:
   secretManager:
   - versionName: projects/exalted-kayak-429218-m7/secrets/git-pat/versions/latest
-    env: 'PAT'
+    env: '_PAT'
 logsBucket: tf-vikki-625
 serviceAccount: 865839242171-compute@developer.gserviceaccount.com
