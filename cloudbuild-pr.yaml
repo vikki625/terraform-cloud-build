@@ -38,7 +38,7 @@ steps:
   name: 'gcr.io/cloud-builders/curl'
   args:
     - -c
-    - curl -X PATCH -H  https://api.github.com/repos/vikki625/$${_REPO}/pulls/$${_PR_NUMBER} "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -d '{"title":"PR Details","body":"updated","state":"open","base":"dev"}'
+    - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1 -d '{"title":"PR Details","body":"updated","state":"open","base":"dev"}'
   secretEnv: ['PAT']
 
 # [End Update GITHUB PR]
