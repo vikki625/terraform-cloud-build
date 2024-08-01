@@ -38,14 +38,14 @@ steps:
   name: 'gcr.io/cloud-builders/curl'
   args:
     - '-X'
-    - 'POST'
+    - 'PATCH'
     - '-H'
     - 'Authorization: Bearer $$PAT'
     - '-H'
     - 'Accept: application/vnd.github.v3+json'
-    - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/${_PR_NUMBER}/comments'
+    - 'https://api.github.com/repos/vikki625/${_REPO}/pulls/${_PR_NUMBER}'
     - '-d'
-    - '{"body" : "HI"}'
+    - '{"title": "PR Details", "body": "updated", "state": "open", "base": "dev"}'
   secretEnv: ['PAT']
 
 # [End Update GITHUB PR]
