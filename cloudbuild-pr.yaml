@@ -40,10 +40,7 @@ steps:
   entrypoint: bash
   args:
   - '-c'
-  - echo "$_PR_NUMBER"
-  - echo "$REPO_NAME"
-  - echo "$_HEAD_BRANCH"
-  #- curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/${_PR_NUMBER} -d '{"title":"PR Details Test","body":"updated","state":"open","base":"dev"}'
+  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/${_PR_NUMBER} -d '{"title":"PR Details Test","body":"updated","state":"open","base":"dev"}'
   secretEnv: ['PAT']
 
 # [End Update GITHUB PR]
