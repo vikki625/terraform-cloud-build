@@ -39,7 +39,7 @@ steps:
   entrypoint: bash
   args:
   - '-c'
-  - echo "$$PAT"
+  - echo "$_BASE_BRANCH"
   - curl -X PATCH -H 'Authorization:Bearer $$PAT' -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1 -d '{"title":"PR Details","body":"updated","state":"open","base":"dev"}'
   secretEnv: ['PAT']
 
