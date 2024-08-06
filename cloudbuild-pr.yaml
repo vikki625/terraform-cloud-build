@@ -1,3 +1,4 @@
+# [GET REPO DETAILS]
 steps:
 - id: 'GIT DETAILS'
   name: 'alpine'
@@ -12,7 +13,9 @@ steps:
       echo "$_HEAD_BRANCH"
       echo "$REPO_NAME"
       echo "***********************"
+# [END REPO DETAILS]
 
+# [START TF INIT]
 - id: 'tf init'
   name: 'hashicorp/terraform'
   entrypoint: 'sh'
@@ -22,8 +25,9 @@ steps:
     cd envs/$_BASE_BRANCH
     ls
     terraform init
+# [END TF INIT]
 
-# [START tf-plan]
+# [START TF PLAN]
 - id: 'tf plan'
   name: 'hashicorp/terraform'
   entrypoint: 'sh'
@@ -32,31 +36,29 @@ steps:
   - | 
     cd envs/$_BASE_BRANCH
     terraform plan -out=/workspace/plan.txt
-# [END tf-plan]
+# [END TF PLAN]
 
-# [Update GITHUB PR]
+# [GET GITHUB PR DETAILS]
 - id: 'PR Comment'
   name: 'badouralix/curl-jq'
   entrypoint: 'sh'
   args:
   - '-c'
   - pr_title=$(curl -X GET -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/{_PR_NUMBER} | jq -r '.title')
-  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$pr_title" --arg body "$(cat /workspace/plan.txt)" '{"title":"pr_title","body":"body","state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
-  - ls
+  - export PR_TITLE=$pr_title
+  - echo $PR_TITLE
   secretEnv: ['PAT']
+# [End GITHUB PR DETAILS]
 
-# [End Update GITHUB PR]
-
-# [Update GITHUB PR]
+# [UPDATE GITHUB PR]
 - id: 'PR Comments'
   name: 'badouralix/curl-jq'
   entrypoint: 'sh'
   args:
   - '-c'
   - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$pr_title" --arg body "$(cat /workspace/plan.txt)" '{"title":"pr_title","body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
-  - ls
   secretEnv: ['PAT']
-
+# [END UPDATE GITHUB PR DETAILS]
 
 availableSecrets:
   secretManager:
