@@ -36,7 +36,7 @@ steps:
 
 # [Update GITHUB PR]
 - id: 'PR Comment'
-  name: 'gcr.io/google-containers/alpine-with-bash:1.0'
+  name: 'cdue/curl-jq'
   entrypoint: bash
   args:
   - '-c'
