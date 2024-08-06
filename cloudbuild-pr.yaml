@@ -1,6 +1,3 @@
-substitutions:
-  _MY_VAR: 'default value'
-
 # [GET REPO DETAILS]
 steps:
 - id: 'GIT DETAILS'
@@ -73,3 +70,5 @@ availableSecrets:
     env: 'PAT'
 logsBucket: tf-vikki-625
 serviceAccount: 865839242171-compute@developer.gserviceaccount.com
+substitutions:
+  _MY_VAR: 'default value'
