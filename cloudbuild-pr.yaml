@@ -36,8 +36,8 @@ steps:
 
 # [Update GITHUB PR]
 - id: 'PR Comment'
-  name: 'launcher.gcr.io/google/ubuntu1604'
-  entrypoint: bash
+  name: 'alpine'
+  entrypoint: 'sh'
   args:
   - '-c'
   - apt-get install -y curl jq
