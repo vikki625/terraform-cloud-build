@@ -47,6 +47,17 @@ steps:
 
 # [End Update GITHUB PR]
 
+# [Update GITHUB PR]
+- id: 'PR Comments'
+  name: 'badouralix/curl-jq'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$pr_title" --arg body "$(cat /workspace/plan.txt)" '{"title":"pr_title","body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
+  - ls
+  secretEnv: ['PAT']
+
+
 availableSecrets:
   secretManager:
   - versionName: projects/exalted-kayak-429218-m7/secrets/git-pat/versions/2
