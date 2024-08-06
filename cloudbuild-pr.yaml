@@ -35,7 +35,7 @@ steps:
   - '-c'
   - | 
     cd envs/$_BASE_BRANCH
-    terraform plan -no-color -out=/workspace/plan.txt
+    terraform plan -no-color > /workspace/plan.txt
 # [END TF PLAN]
 
 # [GET GITHUB PR DETAILS]
