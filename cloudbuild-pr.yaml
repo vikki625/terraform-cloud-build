@@ -32,6 +32,7 @@ steps:
   - | 
     cd envs/$_BASE_BRANCH
     terraform plan -out=/workspace/plan.txt
+    cat plan.txt
 # [END tf-plan]
 
 # [Update GITHUB PR]
