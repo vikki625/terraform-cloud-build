@@ -36,7 +36,7 @@ steps:
 
 # [Update GITHUB PR]
 - id: 'PR Comment'
-  name: 'gcr.io/google.com/cloudsdktool/google-cloud-cli:latest'
+  name: 'gcr.io/google-containers/alpine-with-bash:1.0'
   entrypoint: bash
   args:
   - '-c'
