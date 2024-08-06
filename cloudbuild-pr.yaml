@@ -48,8 +48,6 @@ steps:
   - export MY_VAR="some value"
   - echo '$MY_VAR'
   secretEnv: ['PAT']
-  env:
-  - 'MY_VAR=${_MY_VAR}'
 # [End GITHUB PR DETAILS]
 
 # [UPDATE GITHUB PR]
@@ -64,9 +62,12 @@ steps:
   - 'MY_VAR=${_MY_VAR}'
 # [END UPDATE GITHUB PR DETAILS]
 
+
 availableSecrets:
   secretManager:
   - versionName: projects/exalted-kayak-429218-m7/secrets/git-pat/versions/2
     env: 'PAT'
 logsBucket: tf-vikki-625
 serviceAccount: 865839242171-compute@developer.gserviceaccount.com
+substitutions:
+  _MY_VAR: 'default value'
