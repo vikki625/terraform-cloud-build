@@ -48,6 +48,8 @@ steps:
   - export MY_VAR="some value"
   - echo '$MY_VAR'
   secretEnv: ['PAT']
+  env:
+  - 'MY_VAR=${_MY_VAR}'
 # [End GITHUB PR DETAILS]
 
 # [UPDATE GITHUB PR]
