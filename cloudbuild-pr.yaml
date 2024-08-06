@@ -36,7 +36,7 @@ steps:
 
 # [Update GITHUB PR]
 - id: 'PR Comment'
-  name: 'alpine'
+  name: 'badouralix/curl-jq'
   entrypoint: 'sh'
   args:
   - '-c'
