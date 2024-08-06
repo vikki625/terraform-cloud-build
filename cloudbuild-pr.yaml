@@ -36,7 +36,7 @@ steps:
 
 # [Update GITHUB PR]
 - id: 'PR Comment'
-  name: 'launcher.gcr.io/google/ubuntu1604'
+  name: 'gcr.io/google-containers/gcp-controller-manager'
   entrypoint: bash
   args:
   - '-c'
