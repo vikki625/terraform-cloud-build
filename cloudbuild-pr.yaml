@@ -58,6 +58,8 @@ steps:
   - '-c'
   - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$pr_title" --arg body "$(cat /workspace/plan.txt)" '{"title":"pr_title","body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
   secretEnv: ['PAT']
+  env:
+  - 'MY_VAR=${_MY_VAR}'
 # [END UPDATE GITHUB PR DETAILS]
 
 availableSecrets:
