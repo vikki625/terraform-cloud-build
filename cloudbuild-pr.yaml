@@ -55,7 +55,7 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
-  - gsutil cp tfplan gs://tf-vikki-625/tf-plan/pr-"${_PR_NUMBER}/
+  - gsutil cp tfplan gs://tf-vikki-625/tf-plan/pr-${_PR_NUMBER}/
 # [END UPLOAD PLAN TO GCS]
 
 # [UPDATE GITHUB PR]
