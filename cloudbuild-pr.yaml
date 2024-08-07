@@ -49,15 +49,14 @@ steps:
   secretEnv: ['PAT']
 # [End GITHUB PR DETAILS]
 
-# [GET TEST]
-- id: 'PR Test'
-  name: 'badouralix/curl-jq'
+# [UPLOAD PLAN TO GCS]
+- id: 'Upload plan to GCS'
+  name: 'gcr.io/google.com/cloudsdktool/google-cloud-cli:stable'
   entrypoint: 'sh'
   args:
   - '-c'
-  - ls
-  - echo $(jq -r .title /workspace/pr_details.json)
-# [End GITHUB TEST
+  - gsutil cp tfplan gs://tf-vikki-625/tf-plan/pr-1/
+# [END UPLOAD PLAN TO GCS]
 
 # [UPDATE GITHUB PR]
 - id: 'Updating Plan in PR'
