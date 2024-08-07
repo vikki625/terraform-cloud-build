@@ -49,6 +49,15 @@ steps:
   secretEnv: ['PAT']
 # [End GITHUB PR DETAILS]
 
+# [GET TEST]
+- id: 'PR Details'
+  name: 'badouralix/curl-jq'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - echo $(jq -r ''.title' /workspace/pr_details.json)
+# [End GITHUB TEST
+
 # [UPDATE GITHUB PR]
 - id: 'Updating Plan in PR'
   name: 'badouralix/curl-jq'
