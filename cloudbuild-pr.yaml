@@ -39,7 +39,7 @@ steps:
 # [END TF PLAN]
 
 # [GET GITHUB PR DETAILS]
-- id: 'PR Comment'
+- id: 'PR Details'
   name: 'badouralix/curl-jq'
   entrypoint: 'sh'
   args:
@@ -49,12 +49,12 @@ steps:
 # [End GITHUB PR DETAILS]
 
 # [UPDATE GITHUB PR]
-- id: 'PR Comments'
+- id: 'Updating Plan in PR'
   name: 'badouralix/curl-jq'
   entrypoint: 'sh'
   args:
   - '-c'
-  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$(jq -r '.title' /workspace/pr_title.txt)" --arg body "$(cat /workspace/plan.txt)" '{"title":$pr_title,"body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
+  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$(jq -r '.title' /workspace/pr_details.json)" --arg body "$(cat /workspace/plan.txt)" '{"title":$pr_title,"body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
   secretEnv: ['PAT']
 # [END UPDATE GITHUB PR DETAILS]
 
