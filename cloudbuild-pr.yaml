@@ -54,7 +54,7 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
-  - echo $(jq -r . /workspace/pr_details.json)
+  - echo $(jq -r .title /workspace/pr_details.json)
 # [End GITHUB TEST
 
 # [UPDATE GITHUB PR]
@@ -63,7 +63,7 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
-  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$(jq -c .title /workspace/pr_details.json)" --arg body "$(cat /workspace/plan.txt)" '{"title":"PR Details","body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
+  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$(jq -r .title /workspace/pr_details.json)" --arg body "$(cat /workspace/plan.txt)" '{"title":$pr_title,"body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/terraform-cloud-build/pulls/1
   secretEnv: ['PAT']
 # [END UPDATE GITHUB PR DETAILS]
 
