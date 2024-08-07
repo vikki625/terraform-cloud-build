@@ -36,6 +36,7 @@ steps:
   - | 
     cd envs/$_BASE_BRANCH
     terraform plan -no-color > /workspace/plan.txt
+    terraform plan -out=/workspace/tfplan
 # [END TF PLAN]
 
 # [GET GITHUB PR DETAILS]
@@ -54,6 +55,7 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
+  - ls
   - echo $(jq -r .title /workspace/pr_details.json)
 # [End GITHUB TEST
 
