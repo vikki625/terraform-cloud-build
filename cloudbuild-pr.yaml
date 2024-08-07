@@ -50,7 +50,7 @@ steps:
 # [End GITHUB PR DETAILS]
 
 # [GET TEST]
-- id: 'PR Details'
+- id: 'PR Test'
   name: 'badouralix/curl-jq'
   entrypoint: 'sh'
   args:
