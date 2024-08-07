@@ -44,8 +44,7 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
-  - curl -X GET -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/{_PR_NUMBER} > /workspace/pr_details.json
-  - echo $(jq -r ''.title' /workspace/pr_details.json)
+  - curl -X GET -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/1 > /workspace/pr_details.json
   secretEnv: ['PAT']
 # [End GITHUB PR DETAILS]
 
