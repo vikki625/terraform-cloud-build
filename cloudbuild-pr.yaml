@@ -55,7 +55,6 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
-  - ls
   - echo $(jq -r '.title' pr_details.json)
 # [End GITHUB TEST
 
