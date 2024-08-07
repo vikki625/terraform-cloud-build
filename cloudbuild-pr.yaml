@@ -55,7 +55,7 @@ steps:
   entrypoint: 'sh'
   args:
   - '-c'
-  - echo $(jq -r ''.title' /workspace/pr_details.json)
+  - echo $(jq -r '.title' /workspace/pr_details.json)
 # [End GITHUB TEST
 
 # [UPDATE GITHUB PR]
