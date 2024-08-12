@@ -15,6 +15,16 @@ steps:
       echo "***********************"
 # [END REPO DETAILS]
 
+# [GET GITHUB PR DETAILS]
+- id: 'PR Details'
+  name: 'badouralix/curl-jq'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - curl -X GET -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/${_PR_NUMBER} > /workspace/pr_details.json
+  secretEnv: ['PAT']
+# [End GITHUB PR DETAILS]
+
 # [START TF INIT]
 - id: 'tf init'
   name: 'hashicorp/terraform'
@@ -38,16 +48,6 @@ steps:
     terraform plan -no-color > /workspace/plan.txt
     terraform plan -out=/workspace/tfplan
 # [END TF PLAN]
-
-# [GET GITHUB PR DETAILS]
-- id: 'PR Details'
-  name: 'badouralix/curl-jq'
-  entrypoint: 'sh'
-  args:
-  - '-c'
-  - curl -X GET -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/${_PR_NUMBER} > /workspace/pr_details.json
-  secretEnv: ['PAT']
-# [End GITHUB PR DETAILS]
 
 # [UPLOAD PLAN TO GCS]
 - id: 'Upload plan to GCS'
