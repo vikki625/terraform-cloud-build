@@ -1,0 +1,76 @@
+# [GET REPO DETAILS]
+steps:
+- id: 'GIT DETAILS'
+  name: 'alpine'
+  entrypoint: 'sh'  
+  args: 
+  - '-c'
+  - | 
+      echo "***********************"
+      echo "$BRANCH_NAME"
+      echo "$_BASE_BRANCH"
+      echo "$_PR_NUMBER"
+      echo "$_HEAD_BRANCH"
+      echo "$REPO_NAME"
+      echo "***********************"
+# [END REPO DETAILS]
+
+# [GET GITHUB PR DETAILS]
+- id: 'PR Details'
+  name: 'badouralix/curl-jq'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - curl -X GET -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/${_PR_NUMBER} > /workspace/pr_details.json
+  secretEnv: ['PAT']
+# [End GITHUB PR DETAILS]
+
+# [START TF INIT]
+- id: 'tf init'
+  name: 'hashicorp/terraform'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+    cd envs/$_BASE_BRANCH
+    ls
+    terraform init
+# [END TF INIT]
+
+# [START TF PLAN]
+- id: 'tf plan'
+  name: 'hashicorp/terraform'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+    cd envs/$_BASE_BRANCH
+    terraform plan -no-color > /workspace/plan.txt
+    terraform plan -out=/workspace/tfplan
+# [END TF PLAN]
+
+# [UPLOAD PLAN TO GCS]
+- id: 'Upload plan to GCS'
+  name: 'gcr.io/google.com/cloudsdktool/google-cloud-cli:stable'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - gsutil cp tfplan gs://tf-vikki-625/tf-plan/pr-${_PR_NUMBER}/
+# [END UPLOAD PLAN TO GCS]
+
+# [UPDATE GITHUB PR]
+- id: 'Updating Plan in PR'
+  name: 'badouralix/curl-jq'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - curl -X PATCH -H "Authorization:Bearer $$PAT" -H 'Accept:application/vnd.github.v3+json' -H 'Content-Type:application/json' --data "$(jq -n --arg pr_title "$(jq -r .title /workspace/pr_details.json)" --arg body "$(cat /workspace/plan.txt)" '{"title":$pr_title,"body":$body,"state":"open","base":"dev"}')" https://api.github.com/repos/vikki625/${REPO_NAME}/pulls/${_PR_NUMBER}
+  secretEnv: ['PAT']
+# [END UPDATE GITHUB PR DETAILS]
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/exalted-kayak-429218-m7/secrets/git-pat/versions/2
+    env: 'PAT'
+logsBucket: tf-vikki-625
+serviceAccount: 865839242171-compute@developer.gserviceaccount.com
